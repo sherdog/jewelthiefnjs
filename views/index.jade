@@ -2,10 +2,13 @@ html(lang="us")
 	head
 		title= sample
 		link(rel='stylesheet', href='styles.css') 
-		script(type="javascript", src="jquery")
+		script(type="text/javascript", src="jquery.js")
+		script(type="text/javascript", src="index.js")
+
 	body
 		
 		#container.col
 			h1 Jewel Thief Landing page
 			p.
 				This is the default text for the game landing page, Done in NodeJS using Express & Jade <3 it.
+			a(id='btnGetFriends', href='/friends') Get Friends
