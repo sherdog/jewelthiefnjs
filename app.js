@@ -5,7 +5,7 @@ var express       = require('express'),
     path          = require('path'),
 
     config        = require('./config'),
-
+    connect		  = require('connect');
     api           = require('./routes/api'),
     home          = require('./routes/home'),
     meals         = require('./routes/meals');
@@ -22,11 +22,11 @@ app.configure(function() {
     app.set('view engine', 'ejs');
     app.use(express.favicon());
     app.use(express.logger('dev'));
-    app.use(express.cookieParser());
-    app.use(express.session({secret:'thisismysupersecret'}));
-    app.use(express.cookieSession({ secret: 'fdsfsfdfs'}));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
+    app.use(express.cookieParser('somethingwhat'));
+    app.use(connect.cookieSession({ cookie: { maxAge: 60 * 60 * 1000 }}));
+    
     app.use(app.router);
     app.use(express.static(path.join(__dirname, 'public')));
 });
