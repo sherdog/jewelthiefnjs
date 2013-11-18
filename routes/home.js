@@ -1,6 +1,7 @@
 
 var FB              = require('fb'),
     Step            = require('step'),
+
     config          = require('../config');
 
 FB.options({
@@ -10,27 +11,28 @@ FB.options({
 });
 
 exports.index = function(req, res) {
-    console.log('made it to index');
     var accessToken = req.session.access_token;
+    console.log('made it to index');
     if(!accessToken) {
-         console.log('no access token');
-            res.render('index', {
+        res.render('index', {
             title: 'Express',
             loginUrl: FB.getLoginUrl({ scope: 'user_about_me' })
         });
-
     } else {
+        console.log('made to render the menu');
         res.render('menu');
     }
 };
 
 exports.loginCallback = function (req, res, next) {
     var code            = req.query.code;
-
+    console.log('made it loginCallback');
     if(req.query.error) {
         // user might have disallowed the app
         return res.send('login-error ' + req.query.error_description);
+        console.log('whoops login error: ' . req.query.error_description);
     } else if(!code) {
+        console.log('we be redirecting back to home');
         return res.redirect('/');
     }
 

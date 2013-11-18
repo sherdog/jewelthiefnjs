@@ -35,7 +35,8 @@ app.configure('development', function() {
     app.use(express.errorHandler());
 });
 
-app.post( '/',                home.index);
+app.get( '/',                home.index);
+app.post( '/',				 home.index);
 app.get( '/login/callback',  home.loginCallback);
 app.get( '/logout',          home.logout);
 app.get( '/search',          api.search);
